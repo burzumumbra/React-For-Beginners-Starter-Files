@@ -24,11 +24,11 @@ class App extends React.Component{
         if(localStorageRef){
             this.setState({order: JSON.parse(localStorageRef)});
         }
-        
+
         this.ref = base.syncState(`${params.StoreId}/fishes`, {
             context: this,
             state: 'fishes'
-        });  
+        });
     }
 
     componentDidUpdate(){
@@ -89,23 +89,24 @@ class App extends React.Component{
                     <Header tagline="Fresh Sea Food Market" />
                     <ul className="fishes">
                         {Object.keys(this.state.fishes).map(key => (
-                        <Fish 
+                        <Fish
                             key={key}
-                            index={key} 
+                            index={key}
                             details={this.state.fishes[key]} addToOrder={this.addToOrder}/>
                         ))}
                     </ul>
                 </div>
-                <Order 
+                <Order
                     fishes={this.state.fishes}
                     order ={this.state.order}
                     removeFromOrder={this.removeFromOrder} />
-                <Inventory 
-                    addFish={this.addFish} 
+                <Inventory
+                    addFish={this.addFish}
                     updateFish={this.updateFish}
                     deleteFish={this.deleteFish}
                     loadSamplesFishes={this.loadSamplesFishes}
-                    fishes  ={this.state.fishes} />
+                    fishes  ={this.state.fishes}
+                    storeId={this.props.match.params.StoreId}/>
             </div>
         )
     }
